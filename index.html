@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هم‌نهشتی مثلث‌ها: آموزش و تمرین</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1F2A44;--mut:#5E6B85;--line:#DCE3EE;--soft:#F2F5FA;--card:#fff;--blue:#2F6FB5;--blueb:#DCE9F7;--amb:#B8860B;--ambb:#FFF0C7;--ok:#2E8B57;--okb:#E2F4E9;--no:#C0392B;--nob:#FBE5E2}
+*{box-sizing:border-box}
+body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:#fff;color:var(--ink);line-height:1.9}
+main{max-width:620px;margin:0 auto;padding:16px 14px 96px}
+#learn h1{font-size:21px;margin:6px 0 4px;font-weight:700}
+#learn h2{font-size:17px;margin:0 0 8px;font-weight:700;color:var(--blue)}
+#learn p{margin:6px 0}
+#learn .sub{color:var(--mut);font-size:14px}
+#learn .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+#learn .step[hidden]{display:none}
+#learn .step{animation:in .3s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#learn .step,#learn .tri2,#learn .mk{animation:none;transition:none!important}}
+#learn .m{display:block;direction:ltr;text-align:center;font-size:20px;font-weight:500;margin:2px 0 8px}
+#learn .lab{font-size:14px;color:var(--mut);margin-top:8px}
+#learn .note{background:var(--ambb);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:15px}
+#learn table{width:100%;border-collapse:separate;border-spacing:0 6px}
+#learn td,#learn th{padding:8px 10px;font-size:15px;text-align:right}
+#learn th{font-size:13px;color:var(--mut);font-weight:400}
+#learn td{background:#F2F5FA}
+#learn td:first-child{border-radius:0 8px 8px 0;direction:ltr;text-align:center;font-weight:500;width:40%}
+#learn td:last-child{border-radius:8px 0 0 8px}
+#learn .post{display:none}
+#learn .judged .pre{display:none}
+#learn .judged .post{display:inline}
+#learn .judged tr[data-ok="1"] td{background:var(--okb);color:var(--ok)}
+#learn .judged tr[data-ok="0"] td{background:var(--nob);color:var(--no)}
+#learn .pat{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
+#learn .pat.y{background:var(--okb);border-color:var(--ok)}
+#learn .pat.n{background:var(--nob);border-color:var(--no)}
+#learn .pat b{font-size:15px}
+#learn .pat.y b{color:var(--ok)}
+#learn .pat.n b{color:var(--no)}
+#learn .row{display:flex;gap:10px;align-items:baseline;margin:6px 0}
+#learn .row b{color:var(--blue);min-width:44px}
+#learn details{font-size:14px;color:var(--mut);margin-top:10px}
+#learn summary{cursor:pointer}
+#learn .nav{position:fixed;inset:auto 0 0 0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;justify-content:center}
+#learn button{font:inherit;font-size:15px;border:1.5px solid var(--blue);background:var(--blue);color:#fff;border-radius:8px;padding:6px 18px;cursor:pointer}
+#learn button.g{background:transparent;color:var(--blue)}
+#learn button:disabled{opacity:.35;cursor:default}
+#learn button:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+#learn .dots{display:flex;gap:6px}
+#learn .dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+#learn .dots i.on{background:var(--blue)}
+#learn svg{width:100%;height:auto;display:block}
+#learn .mk{opacity:0;transition:opacity .5s}
+#learn .on .mk{opacity:1}
+#learn .tri2{transform-origin:0 120px;transition:transform .9s ease}
+#learn .fold .tri2{transform:scaleY(-1)}
+#learn .q{transition:opacity .3s}
+#learn .fold .q{opacity:0}
+#learn .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--mut);margin-top:2px}
+#learn .legend span{display:flex;align-items:center;gap:6px}
+#learn .legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+#quiz h1{font-size:20px;margin:4px 0;font-weight:700}
+#quiz p{margin:6px 0}
+#quiz .sub,#quiz .lab{font-size:14px;color:var(--mut)}
+#quiz .card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+#quiz .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+#quiz button{font:inherit;cursor:pointer}
+#quiz .cand{direction:ltr;font-size:17px;font-weight:500;padding:10px 6px;border:1.5px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink)}
+#quiz .cand.sel{border-color:var(--blue);background:var(--blueb)}
+#quiz .cand.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+#quiz .cand.bad{border-color:var(--no);background:var(--nob);color:var(--no)}
+#quiz .opt{display:block;width:100%;text-align:right;margin:6px 0;padding:9px 12px;font-size:15px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+#quiz .opt:hover{border-color:var(--blue)}
+#quiz .opt.bad{border-color:var(--no);background:var(--nob);color:var(--no)}
+#quiz .pat{display:block;width:100%;text-align:right;margin:6px 0;padding:9px 12px;font-size:15px;border:1.5px solid var(--blue);border-radius:10px;background:var(--blueb);color:var(--ink)}
+#quiz .note{background:var(--ambb);border-radius:8px;padding:8px 12px;margin:8px 0;font-size:15px}
+#quiz .note.no{background:var(--nob);color:var(--no)}
+#quiz .note.ok{background:var(--okb);color:var(--ok)}
+#quiz .win{border-color:var(--ok);background:var(--okb)}
+#quiz .m{display:block;direction:ltr;text-align:center;font-size:19px;font-weight:500}
+#quiz svg{width:100%;max-width:340px;height:auto;display:block;margin:6px auto}
+#quiz .nav{position:fixed;inset:auto 0 0 0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;justify-content:center}
+#quiz .nb{border:1.5px solid var(--blue);background:var(--blue);color:#fff;border-radius:8px;padding:6px 18px;font-size:15px}
+#quiz .nb.g{background:#fff;color:var(--blue)}
+#quiz .nb:disabled{opacity:.35;cursor:default}
+#quiz .dots{display:flex;gap:5px}
+#quiz .dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+#quiz .dots i.cur{background:var(--blue)}
+#quiz .dots i.d{background:var(--ok)}
+#quiz button:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+#quiz .lg{display:flex;justify-content:center;gap:18px;font-size:14px;color:var(--mut)}
+#quiz .lg i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-inline-end:6px;vertical-align:middle}
+#quiz .lg .c0{background:rgba(47,111,181,.3);border:1.5px solid var(--blue)}
+#quiz .lg .c1{background:rgba(184,134,11,.35);border:1.5px solid var(--amb)}
+#quiz #back{margin:6px 0}
+#learn .nav,#quiz .nav{flex-wrap:wrap;gap:4px 12px}
+.who{width:100%;text-align:center;font-size:13px;color:var(--mut);line-height:1.5}
+.who b{color:var(--ink)}
+.cr{width:100%;text-align:center;font-size:12px;color:var(--mut);line-height:1.4}
+.crf{position:fixed;inset:auto 0 0 0;padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px))}
+main{padding-bottom:120px}
+#login .card{margin-top:24px}
+#login label{display:block;font-size:14px;color:var(--mut);margin-top:8px}
+#login input{font:inherit;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;margin:4px 0 6px;color:var(--ink)}
+#login input:focus-visible,#login .go:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+#login .go{font:inherit;font-size:16px;border:0;background:var(--blue);color:#fff;border-radius:10px;padding:8px 28px;margin-top:10px;cursor:pointer}
+#login .err{color:var(--no);font-size:14px;min-height:24px}
+</style>
+</head>
+<body>
+<main id="login">
+<h1>تمرین و آموزش هم‌نهشتی مثلث‌ها</h1>
+<div class="card">
+<p>برای شروع، نام و نام‌خانوادگی‌ات را بنویس.</p>
+<label for="fn">نام</label><input id="fn" autocomplete="off">
+<label for="ln">نام‌خانوادگی</label><input id="ln" autocomplete="off">
+<div class="err" id="lerr" role="alert"></div>
+<button class="go" id="go">ورود</button>
+</div>
+<div class="cr crf">طراحی و توسعه توسط پیمان کرم‌پور</div>
+</main>
+<main id="learn" hidden>
+<h1>اثبات هم‌نهشتی با روش شش کاندید</h1>
+<div class="card"><p class="lab">صورت مسئله</p><p>در شکل مقابل پاره‌خط <bdi dir="ltr">AC</bdi> نیمساز زاویه‌ی <bdi dir="ltr">A</bdi> است و اضلاع <bdi dir="ltr">AB</bdi> و <bdi dir="ltr">AD</bdi> برابرند. ثابت کنید مثلث‌های <bdi dir="ltr">ABC</bdi> و <bdi dir="ltr">ADC</bdi> هم‌نهشت‌اند.</p></div>
+
+<div class="card" id="lfig">
+<svg viewBox="0 0 340 240" role="img" aria-label="دو مثلث رنگی که یک ضلع مشترک دارند">
+<polygon points="40,120 150,35 300,120" fill="var(--blueb)" stroke="var(--blue)" stroke-width="2" stroke-linejoin="round"/>
+<g class="tri2">
+<polygon points="40,120 150,205 300,120" fill="var(--ambb)" stroke="var(--amb)" stroke-width="2" stroke-linejoin="round" fill-opacity=".85"/>
+<g class="mk" stroke="var(--ok)" stroke-width="3" fill="none">
+<line x1="98.1" y1="158.5" x2="91.9" y2="166.5"/>
+<path d="M72 120 A32 32 0 0 1 65.3 139.6"/><path d="M65 120 A25 25 0 0 1 59.8 135.3"/>
+</g>
+<text class="mk" x="88" y="140" font-size="13" fill="var(--ok)" text-anchor="middle">2</text>
+</g>
+<line x1="40" y1="120" x2="300" y2="120" stroke="var(--mut)" stroke-width="1.5"/>
+<g class="mk" stroke="var(--ok)" stroke-width="3" fill="none">
+<line x1="40" y1="120" x2="300" y2="120" stroke-width="4"/>
+<line x1="91.9" y1="73.5" x2="98.1" y2="81.5"/>
+<path d="M72 120 A32 32 0 0 0 65.3 100.4"/><path d="M65 120 A25 25 0 0 0 59.8 104.7"/>
+</g>
+<text class="mk" x="88" y="106" font-size="13" fill="var(--ok)" text-anchor="middle">1</text>
+<g class="q" font-size="20" font-weight="700" fill="var(--no)" text-anchor="middle">
+<text x="236" y="70">?</text><text x="236" y="182">?</text><text x="150" y="60">?</text><text x="150" y="198">?</text>
+</g>
+<g fill="var(--ink)" font-size="16" font-weight="500" text-anchor="middle">
+<text x="22" y="125">A</text><text x="150" y="22">B</text><text x="150" y="228">D</text><text x="320" y="125">C</text>
+</g>
+</svg>
+<div class="legend">
+<span><i style="background:var(--blueb);border:1.5px solid var(--blue)"></i>مثلث اول</span>
+<span><i style="background:var(--ambb);border:1.5px solid var(--amb)"></i>مثلث دوم</span>
+<span><i style="background:var(--ok)"></i>برابر و دلیل‌دار</span>
+<span style="color:var(--no)"><b>?</b>&nbsp;نامعلوم</span>
+</div>
+</div>
+
+<section class="step card">
+<h2>گام اول: فرض و حکم</h2>
+<p class="lab">فرض اول، برابری دو ضلع</p>
+<span class="m">AB = AD</span>
+<p class="lab">فرض دوم، نیمساز بودن پاره‌خط مشترک برای زاویه‌ی رأس اول</p>
+<span class="m">Â₁ = Â₂</span>
+<p class="lab">حکم</p>
+<span class="m">△ABC ≅ △ADC</span>
+<div class="note">حکم یک ادعاست و هنوز درستی‌اش ثابت نشده. کار ما این است که از فرض‌ها به آن برسیم.</div>
+</section>
+
+<section class="step card">
+<h2>گام دوم: شش جزء متناظر</h2>
+<p>ترتیب نوشتن رأس‌ها تناظر را مشخص می‌کند:</p>
+<span class="m">A ↔ A &nbsp; B ↔ D &nbsp; C ↔ C</span>
+<p>سه ضلع و سه زاویه، شش جفت جزء متناظر می‌سازند. فعلاً همه فقط کاندیدند.</p>
+<table id="ltb">
+<tr><th>جفت متناظر</th><th>وضعیت</th></tr>
+<tr data-ok="1"><td>AB = AD</td><td><span class="pre">کاندید</span><span class="post">فرض مسئله</span></td></tr>
+<tr data-ok="1"><td>Â₁ = Â₂</td><td><span class="pre">کاندید</span><span class="post">فرض: نیمساز بودن</span></td></tr>
+<tr data-ok="1"><td>AC = AC</td><td><span class="pre">کاندید</span><span class="post">ضلع مشترک، از شکل</span></td></tr>
+<tr data-ok="0"><td>BC = DC</td><td><span class="pre">کاندید</span><span class="post">دلیل نداریم</span></td></tr>
+<tr data-ok="0"><td>B̂ = D̂</td><td><span class="pre">کاندید</span><span class="post">دلیل نداریم</span></td></tr>
+<tr data-ok="0"><td>Ĉ₁ = Ĉ₂</td><td><span class="pre">کاندید</span><span class="post">دلیل نداریم</span></td></tr>
+</table>
+</section>
+
+<section class="step card">
+<h2>گام سوم: برای هر انتخاب دلیل می‌خواهیم</h2>
+<p>جدول گام قبل حالا رنگی شد و شکل هم علامت‌گذاری شد. سه جفت سبز دلیل دارند.</p>
+<p>دو تا از آن‌ها فرض مسئله‌اند و یکی از روی شکل می‌آید.</p>
+<div class="note">سه جفت قرمز نتیجه‌ی هم‌نهشتی‌اند. اگر از آن‌ها در اثبات استفاده کنیم، همان چیزی را که باید ثابت کنیم از قبل پذیرفته‌ایم.</div>
+</section>
+
+<section class="step card">
+<h2>گام چهارم: تطبیق با الگوهای هم‌نهشتی</h2>
+<p>سه جفت سبز باید دقیقاً با یکی از الگوها بخوانند.</p>
+<div class="pat n"><b>ضلع، ضلع، ضلع</b><br>باید برابری دو ضلع دیگر را بدانیم و نمی‌دانیم.</div>
+<div class="pat y"><b>ضلع، زاویه، ضلع</b><br>دو ضلع برابرند و زاویه‌ی بینشان هم برابر است. می‌خواند.</div>
+<div class="pat n"><b>زاویه، ضلع، زاویه</b><br>فقط یک زاویه‌ی برابر داریم و کافی نیست.</div>
+<div class="note">سه جفت دلخواه کافی نیست. دو ضلع با زاویه‌ی غیر محصور بینشان، و سه زاویه، هم‌نهشتی را تضمین نمی‌کنند.</div>
+</section>
+
+<section class="step card">
+<h2>گام پنجم: اثبات نهایی</h2>
+<p>در دو مثلث ABC و ADC داریم:</p>
+<span class="m">AB = AD</span>
+<span class="m">Â₁ = Â₂</span>
+<span class="m">AC = AC</span>
+<p>پس طبق حالت ضلع، زاویه، ضلع:</p>
+<span class="m">△ABC ≅ △ADC</span>
+<p class="lab">برای دیدن معنای هم‌نهشتی، مثلث زرد را روی ضلع مشترک تا کن.</p>
+<button id="fb">تا کردن مثلث دوم</button>
+<p id="fm" class="lab" hidden>دو مثلث کاملاً روی هم افتادند.</p>
+</section>
+
+<section class="step card">
+<h2>گام ششم: چک‌نویس برای هر مسئله</h2>
+<div class="row"><b>اول</b><span>فرض و حکم را بنویس.</span></div>
+<div class="row"><b>دوم</b><span>شش جفت جزء متناظر را به‌عنوان کاندید بنویس.</span></div>
+<div class="row"><b>سوم</b><span>کنار هر جفت بپرس: دلیلش چیست؟ آن‌هایی که دلیل ندارند را خط بزن.</span></div>
+<div class="row"><b>چهارم</b><span>سه جفت باقی‌مانده را با الگوی هم‌نهشتی تطبیق بده و نتیجه بگیر.</span></div>
+</section>
+<div class="nav">
+<div class="who"></div>
+<button id="lpv" class="g">قبلی</button>
+<div class="dots" id="ldots"></div>
+<button id="lnx">گام بعدی</button>
+<div class="cr">طراحی و توسعه توسط پیمان کرم‌پور</div>
+</div>
+</main>
+<main id="quiz" hidden>
+<p><button class="nb g" id="back">← مرور آموزش</button></p>
+<h1>تمرین هم‌نهشتی مثلث‌ها</h1>
+<p class="sub">مسئله را بخوان و از بین شش جزء متناظر، فقط سه جفتی را انتخاب کن که برایشان دلیل داری. بعد دلیل هر جفت را مشخص کن و حالت هم‌نهشتی را بگو.</p>
+<div class="note">راهنما: زاویه‌ای که تنها زاویه‌ی لازم در رأسش است، فقط با نام رأس نوشته می‌شود (مثل <bdi dir="ltr">B̂</bdi>). اگر در یک رأس دو زاویه لازم باشد، با شماره از هم جدا می‌شوند؛ مثلاً <bdi dir="ltr">Ĉ₁</bdi> و <bdi dir="ltr">Ĉ₂</bdi> دو زاویه‌ی متفاوت در رأس C هستند و شماره‌شان کنار گوشه‌ی همان رأس روی شکل نوشته شده است.</div>
+<div id="app"></div>
+<div class="nav">
+<div class="who"></div>
+<button class="nb g" id="qpv">قبلی</button>
+<div class="dots" id="qdots"></div>
+<button class="nb" id="qnx">بعدی</button>
+<div class="cr">طراحی و توسعه توسط پیمان کرم‌پور</div>
+</div>
+</main>
+<script>
+(function(){
+window.PTS={};window.TOTAL=10;window.STU='';
+function esc(x){return x.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+window.upWho=function(){var h='<b>'+esc(window.STU)+'</b> · امتیاز: <bdi dir="ltr">'+Object.keys(window.PTS).length+' / '+window.TOTAL+'</bdi>';
+[].forEach.call(document.querySelectorAll('.who'),function(w){w.innerHTML=h})};
+function enter(){var a=document.getElementById('fn').value.trim(),b=document.getElementById('ln').value.trim();
+if(!a||!b){document.getElementById('lerr').textContent='لطفاً هم نام و هم نام‌خانوادگی را بنویس.';return}
+window.STU=a+' '+b;window.upWho();
+document.getElementById('login').hidden=true;document.getElementById('learn').hidden=false;window.scrollTo(0,0)}
+document.getElementById('go').onclick=enter;
+['fn','ln'].forEach(function(id){document.getElementById(id).onkeydown=function(e){if(e.key==='Enter')enter()}});
+})();
+(function(){
+var secs=[].slice.call(document.querySelectorAll('#learn .step')),n=1;
+var fig=document.getElementById('lfig'),tb=document.getElementById('ltb');
+var pv=document.getElementById('lpv'),nx=document.getElementById('lnx'),dots=document.getElementById('ldots');
+var fb=document.getElementById('fb'),fm=document.getElementById('fm');
+secs.forEach(function(){dots.appendChild(document.createElement('i'))});
+function render(go){
+secs.forEach(function(s,i){s.hidden=i>=n});
+[].forEach.call(dots.children,function(d,i){d.className=i<n?'on':''});
+fig.classList.toggle('on',n>=3);
+tb.classList.toggle('judged',n>=3);
+if(n<5){fig.classList.remove('fold');fb.textContent='تا کردن مثلث دوم';fm.hidden=true}
+pv.disabled=n===1;nx.textContent=n===secs.length?'شروع تمرین':'گام بعدی';
+if(go)secs[n-1].scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+nx.onclick=function(){if(n<secs.length){n++;render(true)}else{document.getElementById('learn').hidden=true;document.getElementById('quiz').hidden=false;window.scrollTo(0,0)}};
+document.getElementById('back').onclick=function(){document.getElementById('quiz').hidden=true;document.getElementById('learn').hidden=false;window.scrollTo(0,0)};
+pv.onclick=function(){if(n>1){n--;render(false)}};
+fb.onclick=function(){
+var f=fig.classList.toggle('fold');
+fb.textContent=f?'باز کردن':'تا کردن مثلث دوم';
+fm.hidden=!f;
+fig.scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+render(false);
+})();
+(function(){
+var PN=["ضلع ضلع ضلع","ضلع زاویه ضلع","زاویه ضلع زاویه","وتر و زاویه‌ی تند","وتر و یک ضلع"];
+var G=[
+{s:"در مربع ABCD قطر AC را رسم کرده‌ایم. ثابت کنید دو مثلث ABC و ADC هم‌نهشت‌اند.",
+f:{p:{A:[35,20],B:[155,20],C:[155,125],D:[35,125]},l:["AB","BC","CD","DA","AC"],tri:[["A","B","C"],["A","D","C"]],a:[["A","B","C",1,20,36],["A","C","D",2,20,34],["B","A","C",1,14,28],["D","A","C",1,14,28],["C","A","B",1,20,36],["C","A","D",2,20,34]]},
+c:[["AB = AD",["ضلع‌های مربع با هم برابرند","قطر مربع نیمساز زاویه است","ضلع مشترک دو مثلث است","زاویه‌های مربع قائمه‌اند"]],
+["BC = DC",["ضلع‌های مربع با هم برابرند","قطرها یکدیگر را نصف می‌کنند","ضلع مشترک دو مثلث است","نتیجه‌ی هم‌نهشتی است"]],
+["AC = AC",["ضلع مشترک دو مثلث است","ضلع‌های مربع برابرند","قطرهای مربع برابرند","قطر نیمساز است"]],
+["B1 = D1",["زاویه‌های مربع همه قائمه‌اند","ضلع‌های مربع برابرند","زاویه‌های متقابل به رأس‌اند","قطر نیمساز است"]],
+["A1 = A2"],["C1 = C2"]],v:{"012":0,"013":1},h:"△ABC ≅ △ADC",r:""},
+{s:"نقطه‌ی P روی عمودمنصف پاره‌خط AB قرار دارد و H وسط AB است. ثابت کنید دو مثلث AHP و BHP هم‌نهشت‌اند.",
+f:{p:{A:[25,125],B:[185,125],H:[105,125],P:[105,20]},l:["AB","AP","BP","PH"],t:["AH","HB"],tri:[["A","H","P"],["B","H","P"]],a:[["H","A","P",1,11,24,null,1],["H","B","P",2,11,24,null,1],["A","B","P",1,22,38],["B","A","P",1,22,38],["P","A","H",1,22,38],["P","B","H",2,22,38]]},
+c:[["AH = BH",["عمودمنصف، پاره‌خط را نصف می‌کند","ضلع مشترک دو مثلث است","نقطه از دو سر پاره‌خط به یک فاصله است","نتیجه‌ی هم‌نهشتی است"]],
+["H1 = H2",["عمودمنصف بر پاره‌خط عمود است","عمودمنصف زاویه را نصف می‌کند","زاویه‌های متقابل به رأس‌اند","ضلع مشترک است"]],
+["PH = PH",["ضلع مشترک دو مثلث است","عمودمنصف پاره‌خط را نصف می‌کند","نقطه از دو سر به یک فاصله است","فرض مسئله است"]],
+["PA = PB"],["A1 = B1"],["P1 = P2"]],v:{"012":1},h:"△AHP ≅ △BHP",r:"PA = PB"},
+{s:"در لوزی ABCD، نقطه‌های M و N وسط ضلع‌های CD و CB هستند. ثابت کنید دو مثلث ADM و ABN هم‌نهشت‌اند.",
+f:{p:{A:[110,10],D:[30,75],B:[190,75],C:[110,140],M:[70,107],N:[150,107]},l:["AD","DC","CB","BA","AM","AN"],tri:[["A","D","M"],["A","B","N"]],a:[["A","D","M",1,22,38],["A","B","N",2,22,38],["D","A","M",1,14,24,0],["B","A","N",1,14,24,180],["M","A","D",1,12,20],["N","A","B",1,12,20]]},
+c:[["AD = AB",["ضلع‌های لوزی با هم برابرند","نقطه‌ها وسط ضلع‌اند","ضلع مشترک دو مثلث است","قطرها بر هم عمودند"]],
+["D1 = B1",["زاویه‌های روبه‌رو در لوزی برابرند","همه‌ی زاویه‌های لوزی برابرند","زاویه‌های متقابل به رأس‌اند","قطر نیمساز زاویه است"]],
+["DM = BN",["نصف ضلع‌های برابر لوزی‌اند","ضلع مشترک دو مثلث است","قطرها یکدیگر را نصف می‌کنند","زاویه‌های روبه‌رو برابرند"]],
+["A1 = A2"],["AM = AN"],["M1 = N1"]],v:{"012":1},h:"△ADM ≅ △ABN",r:"AM = AN"},
+{s:"در متوازی‌الاضلاع ABCD قطر AC را رسم کرده‌ایم. ثابت کنید دو مثلث ABC و CDA هم‌نهشت‌اند.",
+f:{p:{A:[70,15],B:[190,15],C:[150,125],D:[30,125]},l:["AB","BC","CD","DA","AC"],tri:[["A","B","C"],["C","D","A"]],a:[["A","B","C",1,20,38],["A","C","D",2,20,34],["C","A","B",1,20,34],["C","A","D",2,20,38],["B","A","C",1,16,30],["D","A","C",1,16,30]]},
+c:[["AB = CD"],["BC = DA"],
+["AC = CA",["ضلع مشترک دو مثلث است","ضلع‌های روبه‌رو برابرند","قطرها یکدیگر را نصف می‌کنند","دو ضلع موازی‌اند"]],
+["A1 = C2",["دو خط موازی و مورب، زاویه‌های متبادل برابر می‌سازند","زاویه‌های متقابل به رأس‌اند","ضلع‌های روبه‌رو برابرند","قطر نیمساز زاویه است"]],
+["C1 = A2",["دو خط موازی و مورب، زاویه‌های متبادل برابر می‌سازند","ضلع مشترک است","زاویه‌های متقابل به رأس‌اند","زاویه‌های روبه‌رو برابرند"]],
+["B1 = D1"]],v:{"234":2},h:"△ABC ≅ △CDA",r:"AB = CD , BC = DA"},
+{s:"از نقطه‌ی M خارج از دایره‌ای به مرکز O، دو مماس MA و MB را رسم کرده‌ایم. ثابت کنید دو مثلث OAM و OBM هم‌نهشت‌اند.",
+f:{p:{O:[60,80],A:[76,38],B:[76,122],M:[190,80]},l:["OA","OB","OM","MA","MB"],c:[60,80,45],tri:[["O","A","M"],["O","B","M"]],a:[["A","O","M",1,9,16],["B","O","M",1,9,16],["O","A","M",1,18,34,-25],["O","B","M",2,18,34,25],["M","A","O",1,30,50],["M","B","O",2,30,50]]},
+c:[["OA = OB",["شعاع‌های یک دایره برابرند","دو مماس برابرند","ضلع مشترک دو مثلث است","مماس بر شعاع عمود است"]],
+["OM = OM",["ضلع مشترک دو مثلث است","شعاع‌های دایره برابرند","دو مماس برابرند","فرض مسئله است"]],
+["A1 = B1",["مماس بر شعاع در نقطه‌ی تماس عمود است","زاویه‌های متقابل به رأس‌اند","شعاع‌های دایره برابرند","نتیجه‌ی هم‌نهشتی است"]],
+["MA = MB"],["O1 = O2"],["M1 = M2"]],v:{"012":4},h:"△OAM ≅ △OBM",r:"MA = MB"},
+{s:"در شکل مقابل O مرکز دایره است و AD و BC بر دایره مماس‌اند. ثابت کنید دو مثلث AOD و BOC هم‌نهشت‌اند.",
+f:{p:{O:[100,80],A:[45,80],B:[155,80],D:[45,125],C:[155,35]},l:["AB","AD","BC","DC"],c:[100,80,55],tri:[["A","O","D"],["B","O","C"]],a:[["A","O","D",1,9,15],["B","O","C",1,9,15],["O","A","D",1,16,28],["O","B","C",2,16,28],["D","A","O",1,14,20],["C","B","O",1,14,20]]},
+c:[["AO = BO",["شعاع‌های یک دایره برابرند","مماس‌ها برابرند","ضلع مشترک است","قطرها منصف یکدیگرند"]],
+["A1 = B1",["مماس بر شعاع عمود است","زاویه‌های متقابل به رأس‌اند","شعاع‌ها برابرند","دو مماس موازی‌اند"]],
+["O1 = O2",["زاویه‌های متقابل به رأس‌اند","مماس بر شعاع عمود است","شعاع‌های دایره برابرند","زاویه‌های متبادل داخلی‌اند"]],
+["AD = BC"],["OD = OC"],["D1 = C1"]],v:{"012":2},h:"△AOD ≅ △BOC",r:"AD = BC"},
+{s:"مثلث ABC متساوی‌الساقین است (AB=AC) و M و N روی قاعده‌ی BC طوری قرار دارند که BM=NC. ثابت کنید دو مثلث ABM و ACN هم‌نهشت‌اند.",
+f:{p:{A:[105,10],B:[30,130],C:[180,130],M:[78,130],N:[132,130]},l:["AB","AC","BC","AM","AN"],t:["BM","NC"],tri:[["A","B","M"],["A","C","N"]],a:[["A","B","M",1,30,48],["A","C","N",2,30,48],["B","A","C",1,16,40,-15],["C","A","B",1,16,40,195],["M","A","B",1,14,28],["N","A","C",1,14,28]]},
+c:[["AB = AC",["ساق‌های مثلث متساوی‌الساقین برابرند","ضلع مشترک دو مثلث است","نتیجه‌ی هم‌نهشتی است","میانه‌ها برابرند"]],
+["B1 = C1",["زاویه‌های قاعده‌ی متساوی‌الساقین برابرند","زاویه‌های متقابل به رأس‌اند","نیمساز زاویه است","نتیجه‌ی هم‌نهشتی است"]],
+["BM = CN",["فرض مسئله","ضلع مشترک دو مثلث است","ساق‌های مثلث برابرند","نتیجه‌ی هم‌نهشتی است"]],
+["AM = AN"],["M1 = N1"],["A1 = A2"]],v:{"012":1},h:"△ABM ≅ △ACN",r:"AM = AN"},
+{s:"در مستطیل ABCD، پاره‌خط‌های AF و BE طوری رسم شده‌اند که دو زاویه‌ی Â و B̂ برابرند. ثابت کنید دو مثلث ADF و BCE هم‌نهشت‌اند.",
+f:{p:{A:[25,20],B:[195,20],C:[195,110],D:[25,110],F:[75,110],E:[145,110]},l:["AB","BC","CD","DA","AF","BE"],tri:[["A","D","F"],["B","C","E"]],a:[["A","D","F",1,24,42],["B","C","E",1,24,42],["D","A","F",1,10,16],["C","B","E",1,10,16],["F","A","D",1,16,28],["E","B","C",1,16,28]]},
+c:[["AD = BC",["ضلع‌های روبه‌رو در مستطیل برابرند","فرض مسئله","ضلع مشترک دو مثلث است","قطرهای مستطیل برابرند"]],
+["D1 = C1",["زاویه‌های مستطیل همه قائمه‌اند","ضلع‌های روبه‌رو برابرند","فرض مسئله","زاویه‌های متقابل به رأس‌اند"]],
+["A1 = B1",["فرض مسئله","زاویه‌های مستطیل قائمه‌اند","ضلع‌های روبه‌رو برابرند","نتیجه‌ی هم‌نهشتی است"]],
+["AF = BE"],["DF = CE"],["F1 = E1"]],v:{"012":2},h:"△ADF ≅ △BCE",r:"AF = BE"},
+{s:"در مثلث متساوی‌الساقین ABC (AB=AC)، نقطه‌ی M روی نیمساز زاویه‌ی A قرار دارد. ثابت کنید دو مثلث ABM و ACM هم‌نهشت‌اند.",
+f:{p:{A:[105,10],B:[35,130],C:[175,130],D:[105,130],M:[105,75]},l:["AB","AC","BC","AD","MB","MC"],t:["AB","AC"],tri:[["A","B","M"],["A","C","M"]],a:[["A","B","M",1,28,46],["A","C","M",2,28,46],["B","A","M",1,30,44],["C","A","M",1,30,44],["M","A","B",1,14,24],["M","A","C",2,14,24]]},
+c:[["AB = AC",["ساق‌های مثلث متساوی‌الساقین برابرند","ضلع مشترک دو مثلث است","نقطه از دو سر فاصله‌ی یکسان دارد","نتیجه‌ی هم‌نهشتی است"]],
+["A1 = A2",["نقطه روی نیمساز زاویه‌ی رأس است","زاویه‌های قاعده برابرند","زاویه‌های متقابل به رأس‌اند","نتیجه‌ی هم‌نهشتی است"]],
+["AM = AM",["ضلع مشترک دو مثلث است","ساق‌های برابرند","نیمساز، ضلع را نصف می‌کند","فرض مسئله است"]],
+["MB = MC"],["B1 = C1"],["M1 = M2"]],v:{"012":1},h:"△ABM ≅ △ACM",r:"MB = MC"},
+{s:"در مستطیل ABCD قطرهای AC و BD را رسم کرده‌ایم. ثابت کنید دو مثلث ABC و DCB هم‌نهشت‌اند.",
+f:{p:{A:[30,25],B:[190,25],C:[190,115],D:[30,115]},l:["AB","BC","CD","DA","AC","BD"],sep:1,tri:[["A","B","C"],["D","C","B"]],a:[["A","B","C",1,26,40],["D","C","B",1,26,40],["B","A","C",1,18,28,164],["C","D","B",1,18,28,196],["B","D","C",2,30,40],["C","A","B",2,30,40]]},
+c:[["AB = DC",["ضلع‌های روبه‌رو در مستطیل برابرند","ضلع مشترک دو مثلث است","قطرهای مستطیل برابرند","فرض مسئله است"]],
+["B1 = C1",["زاویه‌های مستطیل همه قائمه‌اند","ضلع‌های روبه‌رو برابرند","قطرها یکدیگر را نصف می‌کنند","زاویه‌های متقابل به رأس‌اند"]],
+["BC = CB",["ضلع مشترک دو مثلث است","ضلع‌های روبه‌رو برابرند","قطرها برابرند","فرض مسئله است"]],
+["AC = DB"],["A1 = D1"],["C2 = B2"]],v:{"012":1},h:"△ABC ≅ △DCB",r:"AC = BD"}
+];
+function L(t){return t.replace(/[A-Z△][A-Z0-9a-z=≅△₁₂∠\u0302]*/g,function(m){return '<bdi dir="ltr">'+m+'</bdi>'})}
+function T(t,a){var c={};(a||[]).forEach(function(g){c[g[0]]=(c[g[0]]||0)+1});return t.replace(/([A-Z])([1-9])/g,function(m,l,d){return l+'\u0302'+(c[l]>1?String.fromCharCode(8320+(+d)):'')})}
+function R(x){return Math.round(x*10)/10}
+function fig(f){var P=f.p,k=Object.keys(P),cx=0,cy=0,s;
+k.forEach(function(n){cx+=P[n][0];cy+=P[n][1]});cx/=k.length;cy/=k.length;
+s='<svg viewBox="-10 -14 240 178" role="img" aria-label="شکل مسئله">';
+(f.tri||[]).forEach(function(t,i){s+='<polygon points="'+t.map(function(n){return P[n].join(',')}).join(' ')+'" fill="'+(i?'var(--amb)':'var(--blue)')+'" fill-opacity="'+(i?.22:.18)+'"/>'});
+if(f.c)s+='<circle cx="'+f.c[0]+'" cy="'+f.c[1]+'" r="'+f.c[2]+'" fill="none" stroke="var(--blue)" stroke-width="2"/>';
+(f.l||[]).forEach(function(e){var a=P[e[0]],b=P[e[1]];s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="var(--ink)" stroke-width="2"/>'});
+(f.t||[]).forEach(function(e){var a=P[e[0]],b=P[e[1]],mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy),nx=-dy/d*6,ny=dx/d*6;s+='<line x1="'+(mx-nx)+'" y1="'+(my-ny)+'" x2="'+(mx+nx)+'" y2="'+(my+ny)+'" stroke="var(--amb)" stroke-width="3"/>'});
+(f.q||[]).forEach(function(q){s+='<rect x="'+q[0]+'" y="'+(q[1]-9)+'" width="9" height="9" fill="none" stroke="var(--amb)" stroke-width="2"/>'});
+(f.x||[]).forEach(function(x){s+='<text x="'+x[0]+'" y="'+x[1]+'" font-size="12" fill="var(--amb)">'+x[2]+'</text>'});
+(f.a||[]).forEach(function(g){var nv=f.a.filter(function(q){return q[0]===g[0]}).length,v=P[g[0]],a=P[g[1]],b=P[g[2]],r=g[4],lr=Math.max(14,g[5]*0.5),ux=a[0]-v[0],uy=a[1]-v[1],wx=b[0]-v[0],wy=b[1]-v[1],ul=Math.hypot(ux,uy),wl=Math.hypot(wx,wy),bx,by,bl,t;
+ux/=ul;uy/=ul;wx/=wl;wy/=wl;
+if(g[6]!=null){t=g[6]*Math.PI/180;bx=Math.cos(t);by=Math.sin(t)}else{bx=ux+wx;by=uy+wy;bl=Math.hypot(bx,by);bx/=bl;by/=bl}
+s+='<text x="'+R(v[0]+bx*lr)+'" y="'+R(v[1]+by*lr+3)+'" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--amb)" stroke="#fff" stroke-width="2.5" paint-order="stroke">'+(nv>1?g[3]:'')+'</text>'});
+k.forEach(function(n){var p=P[n],dx=p[0]-cx,dy=p[1]-cy,d=Math.hypot(dx,dy);if(d<2){dx=1;dy=0;d=1}
+s+='<text x="'+(p[0]+dx/d*12)+'" y="'+(p[1]+dy/d*12+5)+'" text-anchor="middle" font-size="15" font-weight="500" fill="var(--ink)">'+n+'</text>'});
+return s+'</svg>'}
+window.TOTAL=G.length;var S=[],cur=0,app=document.getElementById('app'),dots=document.getElementById('qdots');
+G.forEach(function(){dots.appendChild(document.createElement('i'))});
+function LG(f){return '<div class="lg">'+f.tri.map(function(t,i){return '<span><i class="c'+i+'"></i><bdi dir="ltr">△'+t.join('')+'</bdi></span>'}).join('')+'</div>'}
+function SEP(f){var P=f.p,s='<svg viewBox="-10 0 240 70" role="img" aria-label="دو مثلث جدا از هم، با اندازه‌ی یک‌سوم">';
+f.tri.forEach(function(t,i){var cx=i?60:180,cy=34,ox=0,oy=0,Q={};
+t.forEach(function(n){ox+=P[n][0]/3;oy+=P[n][1]/3});
+t.forEach(function(n){Q[n]=[R((cx+(P[n][0]-ox)/3)),R(cy+(P[n][1]-oy)/3)]});
+s+='<polygon points="'+t.map(function(n){return Q[n].join(',')}).join(' ')+'" fill="'+(i?'var(--amb)':'var(--blue)')+'" fill-opacity="'+(i?.22:.18)+'" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/>';
+t.forEach(function(n){var p=Q[n],dx=p[0]-cx,dy=p[1]-cy,d=Math.hypot(dx,dy)||1,o=t.filter(function(x){return x!==n}),
+g=f.a.filter(function(q){return q[0]===n}),
+an=g.filter(function(q){return (q[1]===o[0]&&q[2]===o[1])||(q[1]===o[1]&&q[2]===o[0])})[0];
+s+='<text x="'+R(p[0]+dx/d*8)+'" y="'+R(p[1]+dy/d*8+3.5)+'" text-anchor="middle" font-size="10" font-weight="500" fill="var(--ink)">'+n+'</text>';
+if(an&&g.length>1){var ux=Q[o[0]][0]-p[0],uy=Q[o[0]][1]-p[1],wx=Q[o[1]][0]-p[0],wy=Q[o[1]][1]-p[1],ul=Math.hypot(ux,uy),wl=Math.hypot(wx,wy);ux/=ul;uy/=ul;wx/=wl;wy/=wl;var bx=ux+wx,by=uy+wy,bl=Math.hypot(bx,by);
+s+='<text x="'+R(p[0]+bx/bl*10)+'" y="'+R(p[1]+by/bl*10+3)+'" text-anchor="middle" font-size="8" font-weight="700" fill="var(--amb)" stroke="#fff" stroke-width="2" paint-order="stroke">'+an[3]+'</text>'}})});
+return s+'</svg>'}
+function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function st(i){return S[i]||(S[i]={lock:[],pend:null,bad:[],rb:[],ro:{},done:false,msg:'',mc:''})}
+function render(){
+var g=G[cur],s=st(cur),h='';
+h+='<div class="card"><p>'+L(g.s)+'</p>'+fig(g.f)+(g.f.sep?SEP(g.f):'')+LG(g.f)+'</div>';
+h+='<div class="card"><p class="lab">شش جفت جزء متناظر؛ سه جفت دلیل‌دار را انتخاب کن</p><div class="grid">';
+g.c.forEach(function(c,j){var k=s.lock.indexOf(j)>-1?'ok':s.pend===j?'sel':s.bad.indexOf(j)>-1?'bad':'';
+h+='<button class="cand '+k+'" data-j="'+j+'">'+T(c[0],g.f.a)+'</button>'});
+h+='</div>';
+if(s.pend!==null&&!s.done){h+='<p class="lab">دلیل برابری این جفت چیست؟</p>';
+s.ro[s.pend].forEach(function(k){h+='<button class="opt '+(s.rb.indexOf(k)>-1?'bad':'')+'" data-r="'+k+'">'+g.c[s.pend][1][k]+'</button>'})}
+if(s.msg)h+='<div class="note '+s.mc+'">'+s.msg+'</div>';
+if(s.lock.length===3&&!s.done){h+='<p class="lab">این سه جفت با کدام حالت هم‌نهشتی می‌خوانند؟</p>';
+[0,1,2].forEach(function(p){h+='<button class="pat" data-p="'+p+'">'+PN[p]+'</button>'});
+h+='<p class="lab">مخصوص مثلث‌های قائم‌الزاویه</p>';
+[3,4].forEach(function(p){h+='<button class="pat" data-p="'+p+'">'+PN[p]+'</button>'});
+h+='<button class="opt" data-x="1">انتخاب دوباره</button>'}
+h+='</div>';
+if(s.done){var e=g.v[s.lock.slice().sort().join('')];
+h+='<div class="card win"><p>آفرین! اثبات کامل شد. طبق حالت '+PN[e]+':</p><span class="m">'+g.h+'</span>';
+if(g.r)h+='<p>پس اجزای متناظر برابرند، از جمله:</p><span class="m">'+g.r+'</span>';
+h+='<p class="lab">یک امتیاز برای این سؤال ثبت شد.</p></div>'}
+app.innerHTML=h;
+[].forEach.call(dots.children,function(d,i){d.className=i===cur?'cur':(S[i]&&S[i].done?'d':'')});
+document.getElementById('qpv').disabled=cur===0;
+document.getElementById('qnx').disabled=cur===G.length-1;
+}
+app.onclick=function(e){var b=e.target.closest('button');if(!b)return;
+var g=G[cur],s=st(cur),d=b.dataset;
+if(d.j!==undefined){var j=+d.j;
+if(s.done||s.lock.indexOf(j)>-1)return;
+if(s.lock.length>=3){s.msg='سه جفت کافی است. اگر می‌خواهی، «انتخاب دوباره» را بزن.';s.mc='';return render()}
+if(!g.c[j][1]){if(s.bad.indexOf(j)<0)s.bad.push(j);s.pend=null;s.msg='برای این جفت دلیل نداریم. این از نتیجه‌ی هم‌نهشتی به دست می‌آید و در اثبات نباید از آن استفاده کنیم.';s.mc='no';return render()}
+s.pend=j;s.rb=[];s.msg='';s.ro[j]=s.ro[j]||sh([0,1,2,3]);return render()}
+if(d.r!==undefined){var k=+d.r;
+if(k===0){s.lock.push(s.pend);s.pend=null;s.msg='دلیل درست است.';s.mc='ok'}
+else{s.rb.push(k);s.msg='این دلیل درست نیست. دوباره فکر کن.';s.mc='no'}
+return render()}
+if(d.p!==undefined){var p=+d.p,v=g.v[s.lock.slice().sort().join('')];
+if(v===undefined){s.msg='این سه جفت دلیل دارند، اما با هیچ حالت هم‌نهشتی نمی‌خوانند. «انتخاب دوباره» را بزن.';s.mc='no'}
+else if(v===p){s.done=true;s.msg='';if(!window.PTS[cur]){window.PTS[cur]=1;window.upWho()}}
+else{s.msg='این حالت با سه جفت انتخاب‌شده نمی‌خواند. دوباره فکر کن.';s.mc='no'}
+return render()}
+if(d.x){S[cur]=null;st(cur);render()}
+};
+document.getElementById('qnx').onclick=function(){if(cur<G.length-1){cur++;render();window.scrollTo(0,0)}};
+document.getElementById('qpv').onclick=function(){if(cur>0){cur--;render();window.scrollTo(0,0)}};
+render();
+})();
+</script>
+</body>
+</html>
